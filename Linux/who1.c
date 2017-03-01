@@ -1,7 +1,7 @@
 /***********************************************************
 ******This is my simple version of Who in Unix/Linux
 ------------------------------------------------------------
-******Created by Mikhail Sergeenkov on 16th of February, 2016
+******Created by Mikhail Sergeenkov on 16th of February, 2017
 ******sergeenkov.michael@gmail.com
 ******github.com/Mishelles
 ************************************************************/

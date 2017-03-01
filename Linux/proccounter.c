@@ -3,7 +3,7 @@
 ******It parses /proc/stat to find information about process
 ******and creates a tree of processes using single linked list
 ------------------------------------------------------------
-******Created by Mikhail Sergeenkov on 20th of February, 2016
+******Created by Mikhail Sergeenkov on 20th of February, 2017
 ******sergeenkov.michael@gmail.com
 ******github.com/Mishelles
 ************************************************************/
