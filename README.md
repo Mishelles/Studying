@@ -1,2 +1,2 @@
-# UnicumText
-The uniqueness of the text verification
+# Studying
+The repository for my programming studies
