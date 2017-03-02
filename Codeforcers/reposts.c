@@ -27,7 +27,7 @@ int strComparator(char str1[NAME_LEN], char str2[NAME_LEN]);
 void upCase(char str[NAME_LEN]);
 
 int main(int argc, char const *argv[]) {
-  int n; /*name of reposts*/
+  int n; /*number of reposts*/
   int max_repost_chain=0;
   int k;
   scanf("%d\n", &n);
