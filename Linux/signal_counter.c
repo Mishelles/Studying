@@ -9,7 +9,6 @@
 ******github.com/Mishelles
 ************************************************************/
 
-#include <signal.h>
 #include <stdio.h>
 #include <signal.h>
 #include <unistd.h>
