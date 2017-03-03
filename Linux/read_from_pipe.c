@@ -2,7 +2,7 @@
 ******Linux course on Stepik. Module 4. Task 1.
 -------------------------------------------------------------
 ******Program reads another program's output and counts zeros
-******in it uding popen()
+******in it using popen()
 ------------------------------------------------------------
 ******Created by Mikhail Sergeenkov on the 3rd of March, 2017
 ******sergeenkov.michael@gmail.com
