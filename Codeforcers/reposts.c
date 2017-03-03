@@ -97,7 +97,8 @@ void upCase(char str[NAME_LEN]){
     if(str[i]=='\0'){
       break;
     }else{
-      str[i]=toupper(str[i]);
+      if(isalpha(str[i]))
+        str[i]=toupper(str[i]);
     }
   }
   return;
