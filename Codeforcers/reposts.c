@@ -12,8 +12,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#define NAME_LEN 24
-#define BUF_SIZE 60
+#define NAME_LEN 30
+#define BUF_SIZE 70
 
 struct Repost{
   char reposter[NAME_LEN];
@@ -23,7 +23,6 @@ struct Repost{
 typedef struct Repost Repost;
 
 int counter(Repost *leaf, Repost *tree_head);
-int strComparator(char str1[NAME_LEN], char str2[NAME_LEN]);
 void upCase(char str[NAME_LEN]);
 
 int main(int argc, char const *argv[]) {
@@ -39,10 +38,10 @@ int main(int argc, char const *argv[]) {
   for (int i = 0; i < n; i++) {
     fgets(buf_str, BUF_SIZE, stdin);
     token=strtok(buf_str, " ");
-    strncpy(reposts_array[i].reposter, token, NAME_LEN);
+    strncpy(reposts_array[i].reposter, token, strlen(token));
     token=strtok(NULL, " ");
     token=strtok(NULL, " ");
-    strncpy(reposts_array[i].author, token, NAME_LEN);
+    strncpy(reposts_array[i].author, token, strlen(token));
     reposts_array[i].parent=NULL;
     upCase(reposts_array[i].reposter);
     upCase(reposts_array[i].author);
@@ -51,13 +50,13 @@ int main(int argc, char const *argv[]) {
   }
 
   Repost* tree_head=(Repost*)malloc(sizeof(Repost));
-  strncpy(tree_head->reposter, "POLYCARP", NAME_LEN);
+  strncpy(tree_head->reposter, "POLYCARP", strlen("POLYCARP"));
   tree_head->parent=NULL;
   /*Create tree*/
   for (int i = 0; i < n; i++){
-    if(strComparator(tree_head->reposter, reposts_array[i].author)==0){
+    if(strncmp(tree_head->reposter, reposts_array[i].author, strlen("POLYCARP") )!=0){
       for (int j = 0; j < n; j++){
-        if (strComparator(reposts_array[i].author, reposts_array[j].reposter)==1){
+        if (strncmp(reposts_array[j].reposter, reposts_array[i].author, strlen(reposts_array[j].reposter))==0){
           reposts_array[i].parent=&reposts_array[j];
           break;
         }
@@ -85,26 +84,12 @@ int counter(Repost *leaf, Repost *tree_head){
     ++k;
     ptr=ptr->parent;
   }
-  if (ptr->reposter==tree_head->reposter){
+  if (strncmp(tree_head->reposter, ptr->reposter, strlen(ptr->reposter))==0){
     ++k;
     return k;
   }else{
     return 0;
   }
-}
-
-int strComparator(char str1[NAME_LEN], char str2[NAME_LEN]){
-  int flag=1;
-  for (int i = 0; i < NAME_LEN; i++) {
-    if ((str1[i]=='\0')||(str2[i]=='\0')){
-      break;
-    }
-    if(str1[i]!=str2[i]){
-      flag=0;
-      break;
-    }
-  }
-    return flag;
 }
 
 void upCase(char str[NAME_LEN]){
