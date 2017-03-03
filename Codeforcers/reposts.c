@@ -22,7 +22,7 @@ struct Repost{
 };
 typedef struct Repost Repost;
 
-int counter(Repost *leaf);
+int counter(Repost *leaf, Repost *tree_head);
 int strComparator(char str1[NAME_LEN], char str2[NAME_LEN]);
 void upCase(char str[NAME_LEN]);
 
@@ -50,38 +50,47 @@ int main(int argc, char const *argv[]) {
     memset(token, 0, strlen(token));
   }
 
+  Repost* tree_head=(Repost*)malloc(sizeof(Repost));
+  strncpy(tree_head->reposter, "POLYCARP", NAME_LEN);
+  tree_head->parent=NULL;
   /*Create tree*/
   for (int i = 0; i < n; i++){
-    if(strComparator("Polycarp", reposts_array[i].author)==0){
+    if(strComparator(tree_head->reposter, reposts_array[i].author)==0){
       for (int j = 0; j < n; j++){
         if (strComparator(reposts_array[i].author, reposts_array[j].reposter)==1){
           reposts_array[i].parent=&reposts_array[j];
           break;
         }
       }
+    }else{
+      reposts_array[i].parent=tree_head;
     }
   }
   /*tree traversal*/
   for (int i = 0; i < n; i++){
-    k=counter(&reposts_array[i]);
+    k=counter(&reposts_array[i], tree_head);
     if(k>max_repost_chain){
       max_repost_chain=k;
     }
   }
-  max_repost_chain+=2;
   printf("%d\n", max_repost_chain);
   free(reposts_array);
   return 0;
 }
 
-int counter(Repost *leaf){
+int counter(Repost *leaf, Repost *tree_head){
   Repost *ptr=leaf;
   int k=0;
   while(ptr->parent!=NULL){
     ++k;
     ptr=ptr->parent;
   }
-  return k;
+  if (ptr->reposter==tree_head->reposter){
+    ++k;
+    return k;
+  }else{
+    return 0;
+  }
 }
 
 int strComparator(char str1[NAME_LEN], char str2[NAME_LEN]){
