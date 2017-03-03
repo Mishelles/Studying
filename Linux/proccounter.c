@@ -1,4 +1,6 @@
 /***********************************************************
+******Linux course on Stepik. Module 3. Task 5.
+-----------------------------------------------------------
 ******A program to count all descendants of process in Linux
 ******It parses /proc/stat to find information about process
 ******and creates a tree of processes using single linked list
