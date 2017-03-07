@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
-#define REGION_SIZE 10000
+#define REGION_SIZE 1000
 #define N 100
 
 int main(int argc, char const *argv[]) {
@@ -23,28 +23,28 @@ int main(int argc, char const *argv[]) {
     return 0;
     }
 
-  key_t key1=atoi(argv[1]);
-  key_t key2=atoi(argv[2]);
-  key_t new_key;
+    key_t one=(key_t)atoi(argv[1]);
+    key_t two=(key_t)atoi(argv[2]);
+    int i=0;
+    key_t three=19900604;
 
-  int id1=shmget(key1, REGION_SIZE, 0600);
-  int id2=shmget(key2, REGION_SIZE, 0600);
-  int id3=shmget(new_key, REGION_SIZE, 0666);
+    int shmid1=shmget(one, REGION_SIZE, 0660);
+    int* shared1=(int*)shmat(shmid1,(void*)0,SHM_RDONLY);
 
-  int* attach_one=(int*)shmat(id1,0,SHM_RND);
-  int* attach_two=(int*)shmat(id2,0,SHM_RND);
-  int* attach_new=(int*)shmat(id3,0,SHM_RND);
+    int shmid2=shmget(two, REGION_SIZE, 0660 );
+    int* shared2=(int*)shmat(shmid2,(void*)0,SHM_RDONLY);
 
-  int i=0;
-  for (i=0; i<N; ++i){
-    *attach_new=*attach_two+*attach_two;
-    ++attach_one;
-    ++attach_two;
-    ++attach_new;
-  }
+    int shmid3=shmget(three, REGION_SIZE, IPC_CREAT | 0644);
+    int* shared3=(int*)shmat(shmid3,(void*)0,0);
 
+    for(i=0;i<N;++i){
+      shared3[i]=shared1[i]+shared2[i];
+    }
+    printf("%i\n",(int)three);
 
-  printf("%d\n", (int) new_key);
+    shmdt(shared1);
+    shmdt(shared2);
+    shmdt(shared3);
 
-  return 0;
+    return 0;
 }
