@@ -51,7 +51,7 @@ int main(int c, char **v){
 			if ((deltaX<grave.width)||(deltaY<grave.heigh)){
 				deltaX=graveyard.x2-graveyard.x1;
 				deltaY=church.y1-graveyard.y1;
-				if ((deltaX>=grave.width)||(deltaY>=grave.heigh)){
+				if ((deltaX>=grave.width)&&(deltaY>=grave.heigh)){
 					flag=1;
 				}
 			}else flag=1;
