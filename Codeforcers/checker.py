@@ -29,7 +29,7 @@ Max-=step
 if (SumNumber(x)==SumNumber(Max)) and (x>=Max):
     print (x)
 else:
-    if (SumNumber(Max+90)==SumNumber(Max)):
+    if (SumNumber()==SumNumber(Max)):
         print (Max+90)
     else:
         print (Max)
