@@ -51,12 +51,30 @@ def generate():
 
 def solve(dataset):
     string=dataset
-    
     solution="correct"
     tags_list=[]
+    flag=0
+    tag=""
+    stack=[]
+    for i in range (len(dataset)):
+    	if (flag==0) and (dataset[i])=='<':
+    		flag=1
+    	elif (flag==1) and (dataset[i]!='>'):
+    		tag+=dataset[i]
+    		
+    	else:
+    		flag=0
+    		if (tag!="") and (tag!="br") and (tag!="hr"):	
+    			tags_list.append(tag)
+    		tag=""
+    for x in range (len(tags_list)):
+	    if (tags_list[x][0]!='/'):
+		    stack.append(tags_list[x])
+	    else:
+		    if stack[len(stack)-1]==tags_list[x][1:]:
+			    stack.pop()
+    return "wrong" if len(stack) else "correct"				
 
-    return solution
+    
 tests=generate()
-for x in range(len(tests)):
-    print(tests[x])
-    print("-----------")
+print (solve(tests[4]))
