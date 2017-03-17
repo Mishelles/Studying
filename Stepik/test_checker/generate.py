@@ -1,9 +1,10 @@
+#!/usr/bin/python3
 import random
 import string
 MIN_TAG_LEN = 1
 MAX_TAG_LEN = 4
 MIN_TEXT_LEN = 0
-MAX_TEXT_LEN = 20
+MAX_TEXT_LEN = 100
 TAGS = 20
 AUTO_TESTS = 50
 
@@ -56,46 +57,7 @@ def generate():
     return test_cases
 
 
-def solve(dataset):
-    string=dataset
-    solution=""
-    line_count=1
-    tags_list=[]
-    line=1
-    flag=0
-    tag=""
-    stack=[]
-    for i in range (len(dataset)):
-        pair=[]
-        if dataset[i]=='\n':
-            line_count+=1
-        if (flag==0) and (dataset[i])=='<':
-            flag=1
-        elif (flag==1) and (dataset[i]!='>'):
-            tag+=dataset[i]
-
-        else:
-            flag=0
-            if (tag!="") and (tag!="br") and (tag!="hr"):
-                pair.append(tag)
-                pair.append(line_count)
-                tags_list.append(pair)
-            tag=""
-    for x in range (len(tags_list)):
-        if (tags_list[x][0][0]!='/'):
-            stack.append(tags_list[x])
-        else:
-            if stack[len(stack)-1][0]==tags_list[x][0][1:]:
-                stack.pop()
-            else:
-                line=stack[len(stack)-1][1]
-                break
-    solution = "correct" if len(stack)==0 else "wrong {}".format(line)
-    return (solution)
-
-def check(reply, clue):
-    return 1 if reply == clue else 0
-
 tests=generate()
 for i in range (len(tests)):
-    print(solve(tests[i]))
+    print(tests[i])
+    print("-----------")
